@@ -344,12 +344,19 @@ def main():
     print("Initializing and loading VGGT model...")
     # model = VGGT.from_pretrained("facebook/VGGT-1B")
 
+    # model = VGGT()
+    # _URL = "https://huggingface.co/facebook/VGGT-1B/resolve/main/model.pt"
+    # model.load_state_dict(torch.hub.load_state_dict_from_url(_URL))
+
     model = VGGT()
-    _URL = "https://huggingface.co/facebook/VGGT-1B/resolve/main/model.pt"
-    model.load_state_dict(torch.hub.load_state_dict_from_url(_URL))
+    # 现将参数加载到内存中，在转到显存中，防止爆内存
+    state_dict = torch.load("model.pt", map_location="cpu")
+    model.load_state_dict(state_dict)
+
 
     model.eval()
-    model = model.to(device)
+    model.to(device)
+    print("模型参数加载完毕")
 
     # Use the provided image folder path
     print(f"Loading images from {args.image_folder}...")
