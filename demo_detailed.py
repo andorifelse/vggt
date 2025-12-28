@@ -31,6 +31,7 @@ with torch.no_grad():
 
     # Predict Cameras
     pose_enc = model.camera_head(aggregated_tokens_list)[-1]
+
     # Extrinsic and intrinsic matrices, following OpenCV convention (camera from world)
     extrinsic, intrinsic = pose_encoding_to_extri_intri(pose_enc, images.shape[-2:])
 
