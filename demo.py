@@ -18,9 +18,8 @@ model.to(device)
 
 print("模型参数加载完毕")
 
-
 # Load and preprocess example images (replace with your own image paths)
-image_names = ["examples/kitchen/images/00.png","examples/kitchen/images/01.png","examples/kitchen/images/02.png"]
+image_names = ["examples/kitchen/images/00.png","examples/kitchen/images/01.png"]
 
 images = load_and_preprocess_images(image_names).to(device)
 
